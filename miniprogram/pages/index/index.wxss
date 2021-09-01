@@ -1,0 +1,21 @@
+.switch {
+  width: 120rpx;
+  height: 120rpx;
+  position: fixed;
+  top: 100rpx;
+  right: -60rpx;
+  border-radius: 50%;
+  background: #3091F7;
+  font-size: 20rpx;
+  color: #FFF;
+  text-align: left;
+}
+
+.switch .switch-text {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 20rpx;
+    margin-left: 30rpx;
+    word-wrap: break-word;
+}

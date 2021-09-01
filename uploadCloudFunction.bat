@@ -1,0 +1,1 @@
+"D:\software\微信web开发者工具\cli.bat" cloud functions deploy --e prod-7g6e78574a9d48bc --n quickstartFunctions --r --project "D:\workspace\FinancialRecord" && "D:\software\微信web开发者工具\cli.bat" cloud functions deploy --e test-0g5hwd2pfa0cc484 --n quickstartFunctions --r --project "D:\workspace\FinancialRecord" --report

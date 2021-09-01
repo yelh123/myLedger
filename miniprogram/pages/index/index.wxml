@@ -1,0 +1,2 @@
+<view class="switch" bindtap="switch"><view class="switch-text">切换</view></view>
+<view class="code">{{openId}}</view>
