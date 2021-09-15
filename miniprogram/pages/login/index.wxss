@@ -1,0 +1,54 @@
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.up-title {
+  width: 348rpx;
+  height: 154rpx;
+  position: absolute;
+  bottom: 580rpx;
+}
+
+.bu {
+  width: 274rpx;
+  height: 202rpx;
+  position: absolute;
+  left: 120rpx;
+  bottom: 344rpx;
+}
+
+.yong {
+  width: 272rpx;
+  height: 102rpx;
+  position: absolute;
+  left: 308rpx;
+  bottom: 450rpx;
+}
+
+.chou {
+  width: 218rpx;
+  height: 142rpx;
+  position: absolute;
+  left: 516rpx;
+  bottom: 500rpx;
+}
+
+.login {
+  position: absolute;
+  left: 50%;
+  bottom: 200rpx;
+  transform: translate(-50%, 0);
+  width: 686rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: #333;
+  box-sizing: border-box;
+  color: #FFF;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  line-height: 80rpx;
+  text-align: center;
+}

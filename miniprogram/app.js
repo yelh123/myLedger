@@ -1,4 +1,6 @@
 //app.js
+const { envList } = require('./envList.js')
+
 App({
   onLaunch: function () {
     if (!wx.cloud) {
@@ -14,8 +16,12 @@ App({
       })
     }
 
+    var deviceInfo = wx.getSystemInfoSync()
+
     this.globalData = {
-      openId: ""
+      openId: "",
+      env_id: envList[0].envId,
+      winHeight: deviceInfo.windowHeight
     }
-  }
+  },
 })

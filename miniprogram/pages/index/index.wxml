@@ -1,2 +1,78 @@
 <view class="switch" bindtap="switch"><view class="switch-text">切换</view></view>
-<view class="code">{{openId}}</view>
+<view class="userInfo flex-row">
+  <image class="avatar" src="{{user.avatarUrl}}"></image>
+  <view class="user flex-col">
+    <view class="welcome">Hello,</view>
+    <view class="name">{{user.nickName}}</view>
+  </view>
+</view>
+<view class="container">
+  <view class="search-panel flex-col">
+     <view class="search flex-row">
+      <image class="ic-search" src="../../images/ic-search.png"></image>
+      <input class="search-input" type="text" value="{{searchInput}}" placeholder="请输入进仓编号查询" confirm-type="search" bindinput="searchInputChange" bindconfirm="search" />
+      <view class="cancel-search-input" bindtap="cancelSearchInput">取消</view>
+     </view>
+     <view class="date-row flex-row">
+      <view class="date-tip">选择日期: </view>
+      <view class="date-picker-group flex-row">
+        <picker class="date-picker" mode="date" end="{{end_date ? end_date : ''}}" bindchange="bindStartChange">
+          <view class="date" style="{{start_date ? '' : 'color: #666'}}">{{start_date || '请选择'}}</view>
+        </picker>
+        <view class="to">到</view>
+        <picker class="date-picker" mode="date" start="{{start_date ? start_date : ''}}" bindchange="bindEndChange">
+          <view class="date" style="{{end_date ? '' : 'color: #666'}}">{{end_date || '请选择'}}</view>
+        </picker>
+      </view>
+     </view>
+     <view class="deliver flex-row">
+      <view class="depature flex-row">
+        <view class="title">出发地:</view>
+        <input class="depature-input" style="{{depature ? 'text-align: center;' : ''}}" value="{{depature}}" placeholder="请输入" bindinput="depatureInput"></input>
+      </view>
+      <view class="arrival flex-row">
+        <view class="title">目的地:</view>
+        <input class="arrival-input" style="{{arrival ? 'text-align: center;' : ''}}" value="{{arrival}}" placeholder="请输入" bindinput="arrivalInput"></input>
+      </view>
+     </view>
+     <view class="btns flex-row">
+      <view class="reset-btn" bindtap="reset">重置</view>
+      <view class="search-btn" bindtap="search">搜索</view>
+     </view>
+  </view>
+  <scroll-view wx:if="{{records.length > 0}}" class="list" style="height: {{list_height}}px" scroll-y="{{true}}">
+    <block wx:for="{{records}}" wx:key="delivery_code">
+      <view class="record flex-col" style="{{index == records.length - 1 ? 'border: none;' : ''}}">
+        <view class="record-row flex-row">
+          <view class="delivery-code">{{item.delivery_code}}</view>
+          <view class="date">{{item.date}}</view>
+        </view>
+        <view class="record-row flex-row">
+          <view class="depature">{{item.depature}}</view>
+          <image class="deliver-arrow" src="../../images/deliver-arrow.png"></image>
+          <view class="arrival">{{item.arrival}}</view>
+        </view>
+        <view class="record-row flex-row" style="justify-content: flex-start">
+          <view class="contact"><text>联系人：</text><text>{{item.contact}}</text></view>
+          <view class="phone"><text>电话：</text><text>{{item.phone}}</text></view>
+        </view>
+        <view class="record-row flex-row">
+          <view class="freight"><text>运费: </text><text>{{item.freight}}</text></view>
+          <view class="entry-fee"><text>进仓费: </text><text>{{item.entry_fee}}</text></view>
+          <view class="total"><text>合计: </text><text>{{item.total}}</text></view>
+        </view>
+        <view wx:if="{{item.files.length > 0}}" class="file-row">
+          <block wx:for="{{item.files}}">
+            <view class="file flex-col" bindtap="openDocumnent" data-file="{{item}}">
+              <image class="file-image" src="{{item.imageSrc}}"></image>
+              <view class="file-name">{{item.fileName}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view wx:elif="{{records.length == 0}}" class="list none" style="height: {{list_height}}px">
+    未查询到驳货单记录
+  </view>
+</view>

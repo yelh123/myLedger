@@ -1,0 +1,16 @@
+<view wx:if="{{isShowTabBar}}" class="custom-tab-bar">
+  <view class="icons-row">
+    <view class="home" bindtap="switchTab" data-index="0">
+      <image class="icon-image" src="{{tabBar_index == 0 ? home_active_image : home_image}}"></image>
+      <view class="underText" style="{{tabBar_index == 0 ? 'color: #000;' : ''}}">{{underTexts[0]}}</view>
+    </view>
+    <view class="middle" bindtap="navToNew">
+      <view class="cross-row"></view>
+      <view class="cross-column"></view>
+    </view>
+    <view class="personal" bindtap="switchTab" data-index="1">
+      <image class="icon-image" src="{{tabBar_index == 1 ? financial_active_image : financial_image}}"></image>
+      <view class="underText" style="{{tabBar_index == 1 ? 'color: #000;' : ''}}">{{underTexts[1]}}</view>
+    </view>
+  </view>
+</view>

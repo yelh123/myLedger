@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="selection flex-col">
+    <picker mode="date" fields="yaer" bindchange="onYearChange">
+      <view class="year flex-row">
+        <text>年份：</text><text style="{{year ? '' : 'color: #666;'}}">{{year || '请选择'}}</text>
+        <image class="arrow" src="../../images/arrow_down.png"></image>
+      </view>
+    </picker>
+    <picker mode="date" fields="month" bindchange="onMonthChange">
+      <view class="month flex-row">
+        <text>月份：</text><text style="{{month ? '' : 'color: #666'}}">{{month ||'请选择'}}</text>
+        <image class="arrow" src="../../images/arrow_down.png"></image>
+        <view class="cancel" catchtap="cancelMonth">取消</view>
+      </view>
+    </picker>
+  </view>
+  <view wx:if="{{isShowYearChart}}" class="title">年线图</view> 
+  <f2 wx:if="{{isShowYearChart}}" id="year" class="f2-chart" onInit="{{onInitYearChart}}" />
+  <view wx:if="{{isShowMonthChart}}" class="title">月线图</view>
+  <f2 wx:if="{{isShowMonthChart}}" id="month" class="f2-chart" onInit="{{onInitMonthChart}}" />
+</view>

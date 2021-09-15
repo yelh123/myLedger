@@ -1,0 +1,15 @@
+<view class="file-field flex-col">
+  <view class="field-up">{{field_name}}</view>
+  <view class="field-down">
+    <image wx:if="{{value.length == 0}}" class="ic-file-cross" src='../../images/ic-file-cross.png'
+      bindtap="chooseFile"></image>
+    <view wx:if="{{value.length > 0}}" class="files-row flex-row">
+      <block wx:for="{{value}}" wx:key="fileId">
+        <view class="file flex-col">
+          <image class="file-image" src="{{item.imageSrc}}"></image>
+          <view class="file-name">{{item.fileName}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

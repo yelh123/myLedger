@@ -1,0 +1,49 @@
+/* components/file-uploader/index.wxss */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-field {
+  font-size: 28rpx;
+  margin: 20rpx 30rpx 0;
+}
+
+.file-field .field-up {
+  padding-top: 16rpx;
+}
+
+.file-field .field-down .files-row {
+  flex-wrap: wrap;
+  margin-top: 34rpx;
+}
+
+.files-row .file {
+  justify-content: center;
+  align-items: center;
+  padding: 0 24rpx;
+}
+
+.files-row .file .file-image {
+  width: 110rpx;
+  height: 110rpx;
+}
+
+.files-row .file .file-name {
+  width: 240rpx;
+  font-size: 24rpx;
+  color: #000;
+  line-height: 36rpx;
+  text-align: center;
+}
+
+.ic-file-cross {
+  width: 110rpx;
+  height: 110rpx;
+  margin-top: 34rpx;
+}

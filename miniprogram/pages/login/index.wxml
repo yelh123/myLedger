@@ -1,0 +1,6 @@
+<image class="bg" src="../../images/login-bg.png"></image>
+<image class="up-title" src="../../images/jizhang.png"></image>
+<image class="bu" src="../../images/bu02.png"></image>
+<image class="yong" src="../../images/yong01.png"></image>
+<image class="chou" src="../../images/chou01.png"></image>
+<button class="login" bindtap="getUserProfile">微信登录</button>

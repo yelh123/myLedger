@@ -1,0 +1,44 @@
+.selection {
+  width: 100%;
+  height: 90rpx;
+  padding-left: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.selection .year {
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.selection .month {
+  align-items: center;
+}
+
+.selection .arrow {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 8rpx;
+}
+
+.month .cancel {
+  font-size: 24rpx;
+  color: #000;
+  background: #DDD;
+  text-align: center;
+  padding: 6rpx 12rpx;
+  margin-left: 14rpx;
+}
+
+.title {
+  width: 100%;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  color: #000;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+.f2-chart {
+  width: 100%;
+  height: 500rpx;
+}

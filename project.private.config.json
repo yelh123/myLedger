@@ -57,6 +57,19 @@
         {
           "name": "pages/updateRecordSuccess/index",
           "pathName": "pages/updateRecordSuccess/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "新增驳货单",
+          "pathName": "pages/create_car_record/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "financial",
+          "pathName": "pages/financial/index",
+          "query": "",
           "scene": null
         }
       ]

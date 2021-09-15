@@ -8,11 +8,10 @@ cloud.init({
 exports.main = async (event, context) => {
   // 获取基础信息
   const wxContext = cloud.getWXContext()
-  console.log('event', event)
-  console.log('context', context)
   
   return {
     openid: wxContext.OPENID,
     appid: wxContext.APPID,
     unionid: wxContext.UNIONID,
   }
+}

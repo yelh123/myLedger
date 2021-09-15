@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "file-uploader": "../../components/file-uploader/index"
+  },
+  "navigationBarTitleText": "新增驳货单"
+}
