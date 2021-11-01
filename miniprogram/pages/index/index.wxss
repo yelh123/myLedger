@@ -2,28 +2,6 @@ page {
   background: #EEE;
 }
 
-.switch {
-  width: 120rpx;
-  height: 120rpx;
-  position: fixed;
-  top: 100rpx;
-  right: -60rpx;
-  border-radius: 50%;
-  background: #3091F7;
-  font-size: 20rpx;
-  color: #FFF;
-  text-align: left;
-}
-
-.switch .switch-text {
-    position: relative;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 20rpx;
-    margin-left: 30rpx;
-    word-wrap: break-word;
-}
-
 .userInfo {
   width: 100%;
   margin: 10px 32rpx;
@@ -167,6 +145,17 @@ page {
   border-radius: 28rpx;
 }
 
+.output {
+  margin: 0 38rpx 14rpx;
+  background:rgba(0, 0, 0, 0.2);
+  color: #FFF;
+  font-size: 24rpx;
+  line-height: 56rpx;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 28rpx;
+}
+
 .container .list {
   background: #EEE;
   border-radius: 24rpx;
@@ -217,6 +206,7 @@ page {
   padding-top: 24rpx;
   flex-wrap: wrap;
   border-top: 2rpx solid #CCC;
+  margin-bottom: 20rpx;
 }
 
 .file-row .file {
@@ -232,6 +222,45 @@ page {
 .file-row .file .file-name {
   margin-top: 6rpx;
   font-size: 24rpx;
+}
+
+.btns-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #CCC;
+}
+
+.btns-row .modify {
+  width: 92rpx;
+  height: 46rpx;
+  border-radius: 23rpx;
+  color: #FFF;
+  background: #CCC;
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 46rpx;
+}
+
+.btns-row .delete {
+  margin-left: 24rpx;
+  width: 92rpx;
+  height: 46rpx;
+  border-radius: 23rpx;
+  color: #FFF;
+  background: #000;
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 46rpx;
+}
+
+.none-tip {
+  margin-top: 28rpx;
+  font-size: 20rpx;
+  color: #999;
+  font-weight: 400;
+  text-align: center
 }
 
 .container .none {

@@ -81,10 +81,17 @@ exports.main = async (event, context) => {
     }
   })
 
-  // 等待所有
-  return {
-    year_data,
-    month_data,
+  if(year_data || month_data) {
+    return {
+      code: 200,
+      year_data,
+      month_data
+    }
+  } else {
+    return {
+      code: 300,
+      errMsg: '暂无数据'
+    }
   }
 }
 

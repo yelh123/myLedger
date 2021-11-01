@@ -6,7 +6,7 @@
     </view>
     <view class="field flex-row">
       <view class="field-l">驳货日期</view>
-      <picker name="date"  mode="date" bindchange="dateChange">
+      <picker name="date"  mode="date" bindchange="dateChange" value="{{date}}">
         <view class="field-r" style="{{date ? '' : 'color: #999'}}">{{date || '请选择'}}</view>
       </picker>
     </view>
@@ -34,7 +34,7 @@
       <view class="field-l">进仓费</view>
       <input name="entry_fee" class="field-r" type="number" value="{{entry_fee}}" placeholder="请输入运费金额" placeholder-class="placeholder" data-type="entry_fee" bindinput="inputChange" />
     </view>
-    <file-uploader name="files" field_name="上传驳货单文件(最多5个)"></file-uploader>
+    <file-uploader name="files" field_name="上传驳货单文件(最多5个)" value="{{files}}"></file-uploader>
     <button class="submit" form-type="submit">提交</button>
   </form>
 </view>

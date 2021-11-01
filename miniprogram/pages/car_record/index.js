@@ -11,11 +11,30 @@ Page({
     phone: '',
     freight: '',
     entry_fee: '',
-    files: []
+    files: [],
+    id: ""
   },
 
   onLoad: function (options) {
     that = this
+    if(options.record) {
+      let record = JSON.parse(options.record)
+      wx.setNavigationBarTitle({
+        title: '修改驳货单',
+      })
+      that.setData({
+        id: record._id,
+        delivery_code: record.delivery_code,
+        date: record.date,
+        contact: record.contact,
+        depature: record.depature,
+        arrival: record.arrival,
+        entry_fee: record.entry_fee,
+        freight: record.freight,
+        phone: record.phone,
+        files: record.files
+      })
+    }
   },
 
   onReady: function () {
@@ -72,7 +91,11 @@ Page({
       })
       return
     } else {
-      that.addRecord(record)
+      if(that.data.id) {
+        that.updateRecord(record)
+      }else {
+        that.addRecord(record)
+      }
     }
   },
 
@@ -101,6 +124,40 @@ Page({
       }, 2000)
     }).catch((e) => {
       console.log(e)
+      wx.hideLoading()
+    })
+  },
+
+  updateRecord(record) {
+    wx.showLoading({
+      title: '',
+    })
+    wx.cloud.callFunction({
+      name: 'carFinancialFunctions',
+      config: {
+        env: getApp().globalData.env_id
+      },
+      data: {
+        type: 'updateCarRecord',
+        record: record,
+        id: that.data.id,
+        open_id: wx.getStorageSync('openId')
+      }
+    }).then((res) => {
+      console.log(res)
+      wx.hideLoading()
+      wx.showToast({
+        title: '修改成功',
+      })
+      setTimeout(function() {
+        wx.navigateBack()
+      }, 2000)
+    }).catch((e) => {
+      console.log(e)
+      wx.showToast({
+        title: '修改失败',
+        icon: 'none'
+      })
       wx.hideLoading()
     })
   }

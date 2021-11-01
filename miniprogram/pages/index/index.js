@@ -63,12 +63,6 @@ Page({
     })
   },
 
-  switch (e) {
-    wx.navigateTo({
-      url: '../old_index/index'
-    })
-  },
-
   getCarRecord() {
     wx.showLoading({
       title: '加载中',
@@ -89,12 +83,14 @@ Page({
       }
     }).then((res) => {
       console.log(res)
-      res.result.data.forEach((item, index) => {
-        item.total = Number(item.freight) + Number(item.entry_fee)
-      })
-      that.setData({
-        records: res.result.data
-      })
+      if(Array.isArray(res.result.data)) {
+        res.result.data.forEach((item, index) => {
+          item.total = Number(item.freight) + Number(item.entry_fee)
+        })
+        that.setData({
+          records: res.result.data
+        })
+      }
       wx.hideLoading()
     }).catch((e) => {
       console.log(e)
@@ -172,6 +168,77 @@ Page({
           filePath: res.tempFilePath,
         })
       }
+    })
+  },
+
+  output(e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.cloud.callFunction({
+      name: 'carFinancialFunctions',
+      config: {
+        env: getApp().globalData.env_id
+      },
+      data: {
+        type: 'outputExcel',
+        data_arr: that.data.records
+      }
+    }).then(res => {
+      console.log(res)
+      wx.cloud.downloadFile({
+        fileID: res.result.fileID,
+        success: res => {
+          console.log(res)
+          wx.openDocument({
+            filePath: res.tempFilePath,
+          })
+        }
+      })
+      wx.hideLoading()
+    }).catch(err => {
+      console.log(err)
+      wx.hideLoading()
+    })
+  },
+
+  delete(e) {
+    let id = e.currentTarget.dataset.id
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.cloud.callFunction({
+      name: 'carFinancialFunctions',
+      config: {
+        env: getApp().globalData.env_id
+      },
+      data: {
+        type: 'deleteCarRecord',
+        id: id
+      }
+    }).then(res => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '删除成功'
+      })
+      that.setData({
+        records: []
+      }, function() {
+        that.getCarRecord()
+      })
+    }).catch(err => {
+      wx.showToast({
+        title: '删除失败'
+      })
+      console.log(err)
+      wx.hideLoading()
+    })
+  },
+
+  modify(e) {
+    let record = e.currentTarget.dataset.record
+    wx.navigateTo({
+      url: '../car_record/index?record=' + JSON.stringify(record),
     })
   }
 })

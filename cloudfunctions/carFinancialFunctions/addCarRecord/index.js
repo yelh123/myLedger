@@ -13,8 +13,14 @@ exports.main = async (event, context) => {
   return await db.collection('car_record').add({
     data: event.record
   }).then(res => {
-    return res
+    return {
+      code: 200,
+      msg: '添加成功'
+    }
   }).catch(err => {
-    return err
+    return {
+      code: 300,
+      errMsg: '添加失败'
+    }
   })
 }

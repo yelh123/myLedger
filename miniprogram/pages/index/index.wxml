@@ -1,6 +1,5 @@
-<view class="switch" bindtap="switch"><view class="switch-text">切换</view></view>
 <view class="userInfo flex-row">
-  <image class="avatar" src="{{user.avatarUrl}}"></image>
+  <image class="avatar" src="{{user.avatarUrl || '../../images/user-default.png'}}"></image>
   <view class="user flex-col">
     <view class="welcome">Hello,</view>
     <view class="name">{{user.nickName}}</view>
@@ -39,6 +38,9 @@
       <view class="reset-btn" bindtap="reset">重置</view>
       <view class="search-btn" bindtap="search">搜索</view>
      </view>
+     <view class="output" bindtap="output">
+      导出Excel
+     </view>
   </view>
   <scroll-view wx:if="{{records.length > 0}}" class="list" style="height: {{list_height}}px" scroll-y="{{true}}">
     <block wx:for="{{records}}" wx:key="delivery_code">
@@ -69,7 +71,12 @@
             </view>
           </block>
         </view>
+        <view class="btns-row" style="{{item.files.length == 0 ? 'border: none' : ''}}">
+          <view class="modify" bindtap="modify" data-record="{{item}}">修改</view>
+          <view class="delete" bindtap="delete" data-id="{{item._id}}">删除</view>
+        </view>
       </view>
+      <view wx:if="{{index == records.length - 1}}" class="none-tip">没有了~</view>
     </block>
   </scroll-view>
   <view wx:elif="{{records.length == 0}}" class="list none" style="height: {{list_height}}px">

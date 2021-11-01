@@ -9,8 +9,6 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event)
   const MAX_LIMIT = 100
-  const countResult = await db.collection('car_record').count()
-  const total = countResult.total
   let options = {}
   let {open_id, searchInput, start_date, end_date, depature, arrival} = event
   const _ = db.command
@@ -50,25 +48,43 @@ exports.main = async (event, context) => {
   let where_options = Object.assign({
     open_id: open_id
   }, delivery_code_options, contact_options, date_options, depature_options, arrival_options)
-  // 计算需分几次取
-  const batchTimes = Math.ceil(total / 100)
-  // 承载所有读操作的 promise 的数组
-  const tasks = []
-  for (let i = 0; i < batchTimes; i++) {
-    const promise = db.collection('car_record').skip(i * MAX_LIMIT).limit(MAX_LIMIT).where(where_options).get()
-    tasks.push(promise)
-  }
-  // 等待所有
-  return (await Promise.all(tasks)).reduce((acc, cur) => {
-    return {
-      data: acc.data.concat(cur.data),
-      errMsg: acc.errMsg,
+  const countResult = await db.collection('car_record').where(where_options).count()
+  const total = countResult.total
+  console.log(total)
+  if(total) {
+    // 计算需分几次取
+    const batchTimes = Math.ceil(total / 100)
+    // 承载所有读操作的 promise 的数组
+    const tasks = []
+    for (let i = 0; i < batchTimes; i++) {
+      const promise = db.collection('car_record').skip(i * MAX_LIMIT).limit(MAX_LIMIT).where(where_options).get()
+      tasks.push(promise)
     }
-  })
-  // // 返回数据库查询结果
-  // return await db.collection('car_record').where({
-  //   open_id: event.open_id
-  // }).get().then(res => {
-  //   return res.data
-  // })
+    console.log('tasks', tasks)
+    // 等待所有
+    let all = await Promise.all(tasks).then(res => {
+      return res.reduce((acc, cur) => {
+        console.log('acc', acc)
+        console.log('cur', cur)
+        return acc.data.concat(cur.data)
+      })
+    })
+    let allData = all.data
+    allData.sort((a, b) => {
+      let a_date = new Date(a.date).getTime()
+      let b_date = new Date(b.date).getTime()
+      return a_date - b_date
+    })
+    console.log(allData)
+    return {
+      code: 200,
+      data: allData,
+      errMsg: all.errMsg
+    }
+  } else {
+    return {
+      code: 300,
+      errMsg: '暂无数据'
+    }
+  }
 }

@@ -35,7 +35,7 @@ Component({
 
     navToNew(e) {
       wx.navigateTo({
-        url: '/pages/create_car_record/index',
+        url: '/pages/car_record/index',
       })
     }
   }
