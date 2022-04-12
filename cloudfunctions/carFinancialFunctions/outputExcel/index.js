@@ -22,9 +22,11 @@ exports.main = async (event, context) => {
     let excel_name = '驳货单' + dateStr + '_' + nowDate.getMilliseconds() + ".xlsx"
     //2.定义表内容
     let allData = []
-    let row = ['id', '日期', '驳货单号', '出发地', '目的地', '运费', '进仓费', '合计'] //表头
+    let row = ['id', '日期', '驳货单号', '出发地', '目的地', '运费', '进仓费', '备注', '合计'] //表头
     allData.push(row)
-  
+    
+    let all_money = 0
+
     data_arr.forEach((item, index) => {
       let arr = []
       arr.push(index + 1)
@@ -34,10 +36,16 @@ exports.main = async (event, context) => {
       arr.push(item.arrival)
       arr.push(item.freight)
       arr.push(item.entry_fee)
+      arr.push(item.remark)
       arr.push(item.total)
       allData.push(arr)
+      all_money += Number(item.total)
     })
-  
+
+    let last = new Array(row.length)
+    last[last.length - 1] = all_money
+    allData.push(last)
+
     //3. 把数据保存在excel中
     var buffer = await xlsx.build([{
       name: "sheet1",

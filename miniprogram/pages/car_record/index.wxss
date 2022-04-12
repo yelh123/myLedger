@@ -6,7 +6,6 @@ page {
   margin: 40rpx 32rpx 0;
   background: #FFF;
   border-radius: 28rpx;
-  padding-bottom: 30rpx;
 }
 
 .wrap .field {
@@ -62,6 +61,33 @@ page {
 
 .placeholder {
   color: #999;
+}
+
+.remark {
+  margin-top: 16rpx;
+  margin-left: -14rpx;
+  width: 470rpx;
+  height: 200rpx;
+  background: #F7F7F7;
+  border-radius: 20rpx;
+  padding: 20rpx 20rpx;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.radio-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.label-text {
+  margin-left: 14rpx;
 }
 
 .submit {

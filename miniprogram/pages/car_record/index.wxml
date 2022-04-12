@@ -1,40 +1,55 @@
 <view class="wrap">
-  <form bindsubmit="formSubmit">
-    <view class="field flex-row">
-      <view class="field-l">驳货单号</view>
-      <input name="delivery_code" class="field-r" type="text" value="{{delivery_code}}" placeholder="请输入单号" placeholder-class="placeholder" data-type="delivery_code" bindinput="inputChange" />
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">驳货日期</view>
-      <picker name="date"  mode="date" bindchange="dateChange" value="{{date}}">
-        <view class="field-r" style="{{date ? '' : 'color: #999'}}">{{date || '请选择'}}</view>
-      </picker>
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">出发地</view>
-      <input name="depature" class="field-r" type="text" value="{{depature}}" placeholder="请输入出发地城市" placeholder-class="placeholder" data-type="depature" bindinput="inputChange" />
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">目的地</view>
-      <input name="arrival" class="field-r" type="text" value="{{arrival}}" placeholder="请输入目的地城市" placeholder-class="placeholder" data-type="arrival" bindinput="inputChange" />
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">联系人</view>
-      <input name="contact" class="field-r" type="text" value="{{contact}}" placeholder="请输入相关联系人名称" placeholder-class="placeholder" data-type="contact" bindinput="inputChange" />
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">手机号</view>
-      <input name="phone" class="field-r" type="number" value="{{phone}}" placeholder="请输入相关联系人名称" placeholder-class="placeholder" data-type="phone" bindinput="inputChange" />
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">运费</view>
-      <input name="freight" class="field-r" type="number" value="{{freight}}" placeholder="请输入运费金额" placeholder-class="placeholder" data-type="freight" bindinput="inputChange" />
-    </view>
-    <view class="field flex-row">
-      <view class="field-l">进仓费</view>
-      <input name="entry_fee" class="field-r" type="number" value="{{entry_fee}}" placeholder="请输入运费金额" placeholder-class="placeholder" data-type="entry_fee" bindinput="inputChange" />
-    </view>
-    <file-uploader name="files" field_name="上传驳货单文件(最多5个)" value="{{files}}"></file-uploader>
-    <button class="submit" form-type="submit">提交</button>
-  </form>
+  <scroll-view scroll-y class="scroll" style="height: {{scrollHeight}}rpx">
+    <form bindsubmit="formSubmit">
+      <view class="field flex-row">
+        <view class="field-l">驳货单号</view>
+        <input name="delivery_code" class="field-r" type="text" value="{{delivery_code}}" placeholder="请输入单号" placeholder-class="placeholder" data-type="delivery_code" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">驳货日期</view>
+        <picker name="date"  mode="date" bindchange="dateChange" value="{{date}}">
+          <view class="field-r" style="{{date ? '' : 'color: #999'}}">{{date || '请选择'}}</view>
+        </picker>
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">出发地</view>
+        <input name="depature" class="field-r" type="text" value="{{depature}}" placeholder="请输入出发地城市" placeholder-class="placeholder" data-type="depature" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">目的地</view>
+        <input name="arrival" class="field-r" type="text" value="{{arrival}}" placeholder="请输入目的地城市" placeholder-class="placeholder" data-type="arrival" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">联系人</view>
+        <input name="contact" class="field-r" type="text" value="{{contact}}" placeholder="请输入相关联系人名称" placeholder-class="placeholder" data-type="contact" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">手机号</view>
+        <input name="phone" class="field-r" type="number" value="{{phone}}" placeholder="请输入相关联系人名称" placeholder-class="placeholder" data-type="phone" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">运费</view>
+        <input name="freight" class="field-r" type="number" value="{{freight}}" placeholder="请输入运费金额" placeholder-class="placeholder" data-type="freight" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row">
+        <view class="field-l">进仓费</view>
+        <input name="entry_fee" class="field-r" type="number" value="{{entry_fee}}" placeholder="请输入运费金额" placeholder-class="placeholder" data-type="entry_fee" bindinput="inputChange" />
+      </view>
+      <view class="field flex-row" style="height: 300rpx;align-items: flex-start;">
+        <view class="field-l" style="margin-top: 32rpx;">备注</view>
+        <textarea name="remark" class="remark" placeholder="请输入" placeholder-class="placeholder" data-type="remark" value="{{remark}}" bindinput="inputChange"></textarea>
+      </view>
+      <file-uploader name="files" field_name="上传驳货单文件(最多5个)" value="{{files}}"></file-uploader>
+      <view class="field flex-row" style="border-bottom: none;border-top: 2rpx solid #CCC;margin-top: 20rpx;">
+        <view class="field-l">对账情况</view>
+        <radio-group name="status" class="group" bindchange="statusChange">
+          <view class="flex-row radio-row" wx:for="{{statusList}}">
+            <radio value="{{item.status}}" checked="{{item.status == status}}"></radio>
+            <label class="label-text" for="{{item.name}}"><text>{{item.name}}</text></label>
+          </view>
+        </radio-group>
+      </view>
+      <button class="submit" form-type="submit">提交</button>
+    </form>
+  </scroll-view>
 </view>

@@ -10,13 +10,14 @@ exports.main = async (event, context) => {
   console.log(event)
   const MAX_LIMIT = 100
   let options = {}
-  let {open_id, searchInput, start_date, end_date, depature, arrival} = event
+  let {open_id, searchInput, start_date, end_date, depature, arrival, status} = event
   const _ = db.command
   let delivery_code_options = {},
       contact_options = {},
       date_options = {},
       depature_options = {},
-      arrival_options = {}
+      arrival_options = {},
+      status_options = {}
   // 判断搜索条件
   if(searchInput) {
     let flag = searchInput.match('^[A-Za-z0-9]+$')
@@ -45,9 +46,18 @@ exports.main = async (event, context) => {
       arrival: _.eq(arrival)
     }
   }
+  if(status === '') {
+    status_options = {
+      status: _.eq('0').or(_.eq('1'))
+    }
+  } else {
+    status_options = {
+      status: _.eq(status)
+    }
+  }
   let where_options = Object.assign({
     open_id: open_id
-  }, delivery_code_options, contact_options, date_options, depature_options, arrival_options)
+  }, delivery_code_options, contact_options, date_options, depature_options, arrival_options, status_options)
   const countResult = await db.collection('car_record').where(where_options).count()
   const total = countResult.total
   console.log(total)

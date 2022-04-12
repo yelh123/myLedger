@@ -34,6 +34,16 @@
         <input class="arrival-input" style="{{arrival ? 'text-align: center;' : ''}}" value="{{arrival}}" placeholder="请输入" bindinput="arrivalInput"></input>
       </view>
      </view>
+     <view class="status-row flex-row">
+      <view class="status-title">对账情况:</view>
+      <radio-group name="status" class="group" bindchange="statusChange">
+        <view class="flex-row radio-row" wx:for="{{statusList}}">
+          <radio value="{{item.status}}" checked="{{item.status === status}}"></radio>
+          <label class="label-text" for="{{item.name}}"><text>{{item.name}}</text></label>
+        </view>
+      </radio-group>
+      <view class="status-check-btn" bindtap="checkStatus">一键对账</view>
+     </view>
      <view class="btns flex-row">
       <view class="reset-btn" bindtap="reset">重置</view>
       <view class="search-btn" bindtap="search">搜索</view>
@@ -63,6 +73,9 @@
           <view class="entry-fee"><text>进仓费: </text><text>{{item.entry_fee}}</text></view>
           <view class="total"><text>合计: </text><text>{{item.total}}</text></view>
         </view>
+        <view wx:if="{{item.remark}}" class="record-row flex-row">
+          <view class="remark"><text>备注: </text><text>{{item.remark}}</text></view>
+        </view>
         <view wx:if="{{item.files.length > 0}}" class="file-row">
           <block wx:for="{{item.files}}">
             <view class="file flex-col" bindtap="openDocumnent" data-file="{{item}}">
@@ -71,7 +84,8 @@
             </view>
           </block>
         </view>
-        <view class="btns-row" style="{{item.files.length == 0 ? 'border: none' : ''}}">
+        <view class="btns-row">
+          <view class="status">状态: <text style="color: {{item.status == 1 ? 'green' : 'red'}}">{{item.status == 1 ? '已对账' : '未对账'}}</text></view>
           <view class="modify" bindtap="modify" data-record="{{item}}">修改</view>
           <view class="delete" bindtap="delete" data-id="{{item._id}}">删除</view>
         </view>

@@ -5,6 +5,7 @@ const getCarChartData = require('./getCarChartData/index')
 const outputExcel = require('./outputExcel/index')
 const deleteCarRecord = require('./deleteCarRecord/index')
 const updateCarRecord = require('./updateCarRecord/index')
+const updateAllRecordStatus = require('./updateAllRecordStatus/index')
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -23,5 +24,7 @@ exports.main = async (event, context) => {
       return await deleteCarRecord.main(event, context)
     case 'updateCarRecord':
       return await updateCarRecord.main(event, context)
+    case 'updateAllRecordStatus':
+      return await updateAllRecordStatus.main(event, context)
   }
 }

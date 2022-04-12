@@ -17,6 +17,14 @@ Page({
     end_date: "",
     depature: "",
     arrival: "",
+    status: "",
+    statusList: [{
+      name: '未对账',
+      status: '0'
+    }, {
+      name: '已对账',
+      status: '1'
+    }],
     list_height: 0
   },
 
@@ -79,7 +87,8 @@ Page({
         start_date: that.data.start_date,
         end_date: that.data.end_date,
         depature: that.data.depature,
-        arrival: that.data.arrival
+        arrival: that.data.arrival,
+        status: that.data.status
       }
     }).then((res) => {
       console.log(res)
@@ -137,6 +146,13 @@ Page({
     let val = e.detail.value
     that.setData({
       arrival: val
+    })
+  },
+
+  statusChange(e) {
+    console.log(e)
+    that.setData({
+      status: e.detail.value
     })
   },
 
@@ -239,6 +255,26 @@ Page({
     let record = e.currentTarget.dataset.record
     wx.navigateTo({
       url: '../car_record/index?record=' + JSON.stringify(record),
+    })
+  },
+
+  checkStatus(e) {
+    wx.cloud.callFunction({
+      name: 'carFinancialFunctions',
+      config: {
+        env: getApp().globalData.env_id
+      },
+      data: {
+        type: 'updateAllRecordStatus'
+      }
+    }).then(res => {
+      console.log(res)
+      wx.showToast({
+        title: `已更新${res.result.stats.updated}`
+      })
+      that.search()
+    }).catch(err => {
+      console.log(err)
     })
   }
 })

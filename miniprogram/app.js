@@ -17,11 +17,11 @@ App({
     }
 
     var deviceInfo = wx.getSystemInfoSync()
-
     this.globalData = {
       openId: "",
       env_id: envList[0].envId,
-      winHeight: deviceInfo.windowHeight
+      winHeight: deviceInfo.windowHeight,
+      rpx_factor: 750 / deviceInfo.screenWidth 
     }
   },
 })

@@ -232,6 +232,54 @@ page {
   border-top: 2rpx solid #CCC;
 }
 
+.btns-row .status {
+  position: absolute;
+  left: 24rpx;
+  font-size: 28rpx;
+}
+
+.status-row {
+  height: 40rpx;
+  margin: 0 24rpx 24rpx; 
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.status-row .status-title {
+  font-weight: 600;
+  margin-right: 24rpx;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.status-check-btn {
+  width: 160rpx;
+  height: 40rpx;
+  margin-left: 60rpx;
+  background: #000;
+  border-radius: 28rpx;
+  font-size: 20rpx;
+  color: white;
+  font-weight: bold;
+  line-height: 40rpx;
+  text-align: center
+}
+
+.radio-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.label-text {
+  margin-left: 14rpx;
+}
+
 .btns-row .modify {
   width: 92rpx;
   height: 46rpx;

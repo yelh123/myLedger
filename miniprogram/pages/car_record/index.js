@@ -1,8 +1,12 @@
 
 var that
+var app = getApp()
+var gD = app.globalData
+
 Page({
 
   data: {
+    scrollHeight: 0,
     delivery_code: '',
     date: '',
     depature: '',
@@ -12,7 +16,15 @@ Page({
     freight: '',
     entry_fee: '',
     files: [],
-    id: ""
+    id: "",
+    status: 0,
+    statusList: [{
+      name: '未对账',
+      status: 0
+    }, {
+      name: '已对账',
+      status: 1
+    }]
   },
 
   onLoad: function (options) {
@@ -22,6 +34,7 @@ Page({
       wx.setNavigationBarTitle({
         title: '修改驳货单',
       })
+      console.log(record)
       that.setData({
         id: record._id,
         delivery_code: record.delivery_code,
@@ -32,7 +45,9 @@ Page({
         entry_fee: record.entry_fee,
         freight: record.freight,
         phone: record.phone,
-        files: record.files
+        files: record.files,
+        status: record.status || 0, //status 1 是已经对账成功 | 0 是未对账的
+        remark: record.remark || ''
       })
     }
   },
@@ -40,8 +55,19 @@ Page({
   onReady: function () {
 
   },
-  onShow: function () {
-
+  onReady: function () {
+    that.calScrollHeight()
+  },
+  calScrollHeight() {
+    const query = wx.createSelectorQuery()
+    query.select('.submit').boundingClientRect()
+    query.exec(res => {
+      console.log(res)
+      let h = gD.winHeight * gD.rpx_factor - 176 - 32 - 30
+      that.setData({
+        scrollHeight: h
+      })
+    })
   },
   inputChange(e) {
     let type = e.currentTarget.dataset.type
@@ -159,6 +185,13 @@ Page({
         icon: 'none'
       })
       wx.hideLoading()
+    })
+  },
+
+  statusChange(e) {
+    console.log(e)
+    that.setData({
+      status: e.detail.value
     })
   }
 })

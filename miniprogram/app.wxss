@@ -42,3 +42,43 @@ page {
   display: flex;
   flex-direction: column;
 }
+
+radio {
+  display: flex;
+  align-items: center;
+  width: 28rpx;
+  height: 28rpx;
+  margin-top: 2rpx;
+}
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border: 2rpx solid #333;
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+radio .wx-radio-input.wx-radio-input-checked{
+  border-radius: 50%;
+  width: 28rpx;
+  height: 28rpx;
+  background: #FFF;
+  border: 2rpx solid #333;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 0rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 0rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 12rpx;
+  text-align: center;
+  font-size: 0rpx; /* 对勾大小 30rpx */
+  color: #333; /* 对勾颜色 白色 */
+  background: #FFF;
+  border-radius: 50%;
+  border: 8rpx solid #333;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
